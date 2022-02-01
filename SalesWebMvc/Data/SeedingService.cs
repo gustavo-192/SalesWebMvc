@@ -24,6 +24,7 @@ namespace SalesWebMvc.Data
             {
                 return; // DB ja foi populado
             }
+
             Departament d1 = new Departament(1, "Computers");
             Departament d2 = new Departament(2, "Eletronics");
             Departament d3 = new Departament(3, "Fashion");
