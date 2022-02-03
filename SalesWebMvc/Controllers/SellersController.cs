@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalesWebMvc.Models;
+using SalesWebMvc.Models.ViewModels;
 using SalesWebMvc.Services;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,14 @@ namespace SalesWebMvc.Controllers
     {
         //Declarando dependência para o SellerService
         private readonly SellerService _sellerService;
+        //Declarando dependência para o DepartamentService
+        private readonly DepartamentService _departamentService;
 
         //Injeção de dependência
-        public SellersController(SellerService sellerService)
+        public SellersController(SellerService sellerService, DepartamentService departamentService)
         {
             _sellerService = sellerService;
+            _departamentService = departamentService;
         }
 
         public IActionResult Index()
@@ -27,9 +31,13 @@ namespace SalesWebMvc.Controllers
             return View(list);
         }
 
+        //Método que abre o formulário para cadastrar o vendedor
         public IActionResult Create()
         {
-            return View();
+            //Carregando departamentos do banco
+            var departaments = _departamentService.FindAll();
+            var viewModel = new SellerFormViewModel { Departaments = departaments};
+            return View(viewModel);
         }
 
         [HttpPost]
