@@ -15,15 +15,28 @@ namespace SalesWebMvc.Services
         {
             _context = context;
         }
-
+        //Listar vendedores
         public List<Seller> FindAll()
         {
             //Retornar do banco de dados todos os vendedores
             return _context.Seller.ToList();
         }
+        //Inserir vendedores
         public void Insert(Seller obj)
         {
             _context.Add(obj);
+            _context.SaveChanges();
+        }
+        //Encontrar por Id
+        public Seller FindById(int id)
+        {
+            return _context.Seller.FirstOrDefault(obj => obj.Id == id);
+        }
+        //Remover vendedores
+        public void Remove(int id)
+        {
+            var obj = _context.Seller.Find(id);
+            _context.Seller.Remove(obj);
             _context.SaveChanges();
         }
     }
