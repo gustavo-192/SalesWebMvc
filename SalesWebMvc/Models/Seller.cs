@@ -41,7 +41,6 @@ namespace SalesWebMvc.Models
         {
             //filtrar lista de vendas para obter nova lista neste intervalo de data
             return Sales.Where(sr => sr.Date >= initial && sr.Date <= final).Sum(sr => sr.Amount);
-
         }
     }
 }
